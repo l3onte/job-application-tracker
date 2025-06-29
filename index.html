@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The main objective of this web application is to help users organize and keep track of their job applications. This way, users can manage their job hunt more effectively and increase their chances of landing a job.">
+    <meta name="keywords" content="jobs, applications, tracker, find">
+    <meta name="author" content="Leonte Joel Canales Berrios">
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="fonts/fonts.css">
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="list__item">
+                    <h1>App Job Tracker</h1>
+                </li>
+                <li class="list__item">
+                    <div class="search-container">
+                        <input type="search" placeholder="search" class="search-input">
+                        <img src="assets/icons/search.png" alt="" class="list__icon icon--search">
+                        <button class="sort-button">
+                            <img src="assets/icons/setting.png" alt="" class="list__icon icon--sort">
+                        </button>
+
+                        <div class="sort-options">
+                            <p>Options</p>
+                            <label>By Status
+                                <input type="checkbox">
+                            </label>
+
+                            <label>By Date
+                                <input type="checkbox">
+                            </label>
+                        </div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <button class="mood-button mood-button--active">
+                        <div class="mood-button__circle"></div>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="table-section">
+            <table class="table">
+                <thead class="table__header">
+                    <tr class="table__field">
+                        <th class="table__header-column">Job</th>
+                        <th class="table__header-column">Company</th>
+                        <th class="table__header-column">Aplied Date</th>
+                        <th class="table__header-column">Status</th>
+                        <th class="table__header-column">Notes</th>
+                        <th class="table__header-column">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table__field">
+                        <td class="table__column">Programmer</td>
+                        <td class="table__column">Microsoft</td>
+                        <td class="table__column">12-04-25</td>
+                        <td class="table__column"><strong class="status">Pending</strong></td>
+                        <td class="table__column">Goob job</td>
+                        <td class="table__column">
+                            <button class="menu-btn" id="menuToggle">☰</button>
+
+                            <div class="dropdown-menu" id="menu">
+                                <button class="dropdown__button button--edit">Edit</button>
+                                <button class="dropdown__button button--delete">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table__field">
+                        <td class="table__column">Programmer</td>
+                        <td class="table__column">Microsoft</td>
+                        <td class="table__column">12-04-25</td>
+                        <td class="table__column"><strong class="status status--en-proceso">In Process</strong></td>
+                        <td class="table__column">Goob job</td>
+                        <td class="table__column">
+                        <button class="menu-btn" id="menuToggle">☰</button>
+
+                            <div class="dropdown-menu" id="menu">
+                                <button class="dropdown__button button--edit">Edit</button>
+                                <button class="dropdown__button button--delete">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table__field">
+                        <td class="table__column">Programmer</td>
+                        <td class="table__column">Microsoft</td>
+                        <td class="table__column">12-04-25</td>
+                        <td class="table__column"><strong class="status status--rechazado">Rejected</strong></td>
+                        <td class="table__column">Goob job</td>
+                        <td class="table__column">
+                            <button class="menu-btn" id="menuToggle">☰</button>
+
+                            <div class="dropdown-menu" id="menu">
+                                <button class="dropdown__button button--edit">Edit</button>
+                                <button class="dropdown__button button--delete">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="table__field">
+                        <td class="table__column">Programmer</td>
+                        <td class="table__column">Microsoft</td>
+                        <td class="table__column">12-04-25</td>
+                        <td class="table__column"><strong class="status status--aceptado">Accepted</strong></td>
+                        <td class="table__column">Goob job</td>
+                        <td class="table__column">
+                            <button class="menu-btn" id="menuToggle">☰</button>
+
+                            <div class="dropdown-menu" id="menu">
+                                <button class="dropdown__button button--edit">Edit</button>
+                                <button class="dropdown__button button--delete">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <dialog id="modal">
+            <div class="modal__header">
+            </div>
+            <div class="modal__content">
+            </div>
+            <div class="modal__footer">
+                <button class="modal__button reset--button">Reset</button>
+                <button class="modal__button save--button">Save</button>
+            </div>
+        </dialog>
+
+    </main>
+    <aside class="aside-container">
+        <a href="https://github.com/l3onte/job-application-tracker" target="_blank" class="aside__link"><img src="assets/icons/github.png" alt="" class="aside__icon github--icon"></a>
+        <button class="aside__link aside--add-button" id="add-button">
+            <img src="assets/icons/add.png" alt="" class="aside__icon">
+        </button> 
+    </aside>
+
+    <footer>
+        <h4>2025 Job Application Tracker. Todos los derechos reservados.</h4>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/interactions/buttons.js"></script>
+</body>
+</html>
