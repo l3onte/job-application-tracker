@@ -1,0 +1,370 @@
+body {
+    margin: 0;
+    background: #e4e4e4;
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.nav {
+    margin-top: 2em
+}
+
+.nav__list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}
+
+.list__icon {
+    width: 2em;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+h1:hover {
+    transform: scale(1.05);
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 40em;
+}
+
+.search-input {
+    position: relative;
+    padding: 10px 40px 10px 15px;
+    width: 100%;
+    padding: 1em;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    padding: 2em;
+}
+
+.icon--search {
+    position: absolute;
+    pointer-events: none;
+    width: 1.5em;
+    padding: .5em;
+}
+
+.sort-button {
+    background-color: transparent;
+    border: none;
+    margin-left: .5em;
+    cursor: pointer;
+    position: relative;
+}
+
+.sort-options {
+    position: absolute;
+    right: 20%;
+    bottom: 77%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 0 0 1.2em 0;
+    width: 8em;
+    border-radius: 5px;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.sort-options.active {
+    display: flex;
+}
+
+.mood-button {
+    padding: 15px 30px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mood-button--active {
+    justify-content: end;
+}
+
+.mood-button:not(.mood-button--active) {
+    justify-content: start;
+}
+
+.mood-button__circle {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+}
+
+main {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+}
+
+.table-section {
+    width: 100vw;
+    height: 48vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table {
+    width: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px 5px rgba(121, 121, 121, 0.6);
+    font-size: 16px;
+}
+
+.table__column,
+.table__header-column {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.table__header {
+    background-color: #000105;
+    color: white;
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+th, td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #d8d8d8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+    position: relative;
+}
+
+.status {
+    background-color: #F1C40F;
+    padding: 3px 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px .5px #8b8b8b;
+}
+
+.status--en-proceso {
+    background-color: #3498DB;
+}
+
+.status--rechazado {
+    background-color: #E74C3C;
+}
+
+.status--aceptado {
+    background-color: #2ECC71;
+}
+
+.menu-btn {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    padding: 10px 0;
+    min-width: 4.8em;
+    padding: 10px 20px;
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.dropdown__button {
+    padding: .4em 1em;
+    border: none;
+    border-radius: 5px;
+    margin: .3em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown__button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 10px #747373;
+}
+
+.button--edit {
+    background-color: #3498DB;
+}
+
+.button--delete {
+    background-color: #E74C3C;
+}
+
+#modal {
+    position: relative;
+    width: 30em;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 30px #727272;
+}
+
+.modal__close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal__close-button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    background-color: rgb(240, 93, 93);
+    width: 30px;
+    height: 25px;
+    padding: .3em;
+    cursor: pointer;
+}
+
+.modal__close-button button:hover {
+    background-color: #fa2e2e;
+    box-shadow: 0 0 10px #000;
+}
+
+.modal__header {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.modal__content {
+    display: flex;
+    flex-direction: column;
+    padding: 5% 10% 5% 10%;
+}
+
+.modal__input-label {
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+
+.modal__input {
+    border-radius: 5px;
+    padding: 3% 1%;
+    margin-bottom: 5%;
+    cursor: pointer;
+}
+
+.status--input {
+    background-color: #000;
+    color: #fff;
+}
+
+.status--input option {
+    background-color: #fff;
+    color: #000;
+}
+
+.notes--input {
+    font-family: sans-serif;
+    resize: vertical;
+    min-height: 5em;
+}
+
+.modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__button {
+    padding: 2% 5%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 2%;
+    font-size: 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px#9e9e9e;
+}
+
+.modal__button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 10px 3px #757575;
+}
+
+.save--button {
+    background-color: #72e9a3;
+}
+
+.aside-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 10em;
+    padding-inline: 8%
+}
+
+.aside--add-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.aside__link:hover {
+    transform: scale(1.5);
+}
+
+.aside__icon {
+    width: 4em;
+}
+
+.github--icon {
+    width: 3.5em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    color: #fff;
+    background-color: #000;
+    width: 100%;
+    height: 4em;
+}
