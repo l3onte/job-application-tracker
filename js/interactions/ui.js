@@ -22,9 +22,9 @@ function asignStatusLabel(status) {
 
 export async function showData() {
     const tBody = document.querySelector('tbody');
-    const data = await getApplications();
     tBody.innerHTML = "";
-
+    const data = await getApplications();
+    
     data.forEach(app => {
         const row = document.createElement('tr');
 
@@ -47,15 +47,14 @@ export async function showData() {
                     data-date="${app.date}"
                     data-status="${app.status}"
                     data-notes="${app.notes}">Edit</button>
-                    <button class="dropdown__button button--delete">Delete</button>
+                    <button class="dropdown__button button--delete"
+                    data-id="${app.id}">Delete</button>
                 </div>
             </td>
         `;
 
         tBody.appendChild(row);
     })
-
-    console.log(data);
 }
 
 export function addModalContent() {
