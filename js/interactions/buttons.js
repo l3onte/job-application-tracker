@@ -111,7 +111,6 @@ document.addEventListener('click', (event) => {
         });
     }
 });
-// Actions Buttons end
 
 document.getElementById("add-button").addEventListener("click", () => {
     document.querySelector('.modal__header').innerHTML =  `
