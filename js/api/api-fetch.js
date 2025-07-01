@@ -53,8 +53,29 @@ export async function deleteApplication(id) {
             method: 'DELETE'
         });
 
-        if (!response) {
+        if (!response.ok) {
             throw new Error("Error deleting the application");
+        }
+
+        return true;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
+
+export async function editApplication(id, dataUpdate) {
+    try {
+        const response = await fetch(`${api}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body: JSON.stringify(dataUpdate)
+        });
+
+        if (!response.ok) {
+            throw new Error("Error to update the application");
         }
 
         return true;
