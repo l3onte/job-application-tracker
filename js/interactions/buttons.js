@@ -3,7 +3,6 @@ import * as api from '../api/api-fetch.js';
 import * as applications from '../data/applications.js';
 
 const moodButton = document.querySelector(".mood-button");
-const toggleButtons = document.querySelectorAll('.menu-btn');
 const sortButton = document.querySelector(".sort-button");
 const sortOptions = document.querySelector(".sort-options");
     
@@ -18,6 +17,37 @@ sortButton.addEventListener("click", (event) => {
     event.stopPropagation();
 });
 // Sort Options Button End
+
+function editButton(event) {
+    const editBtn = event.target.closest('.button--edit');
+    if (editBtn) {
+        document.querySelector('.modal__header').innerHTML =  `
+            <form method="dialog" class="modal__close-button">
+                <button>x</button>
+            </form>
+            <h2>EDIT APPLICATION</h2>
+        `;
+
+        ui.addModalContent();
+        
+        document.querySelector('#input-job').value = editBtn.dataset.jobtitle;
+        document.querySelector('#input-company').value = editBtn.dataset.company;
+        document.querySelector('#date-input').value = editBtn.dataset.date;
+        document.querySelector('#status-input').value = editBtn.dataset.status;
+        document.querySelector('.notes--input').value = editBtn.dataset.notes;
+
+        document.querySelector('.save--button').textContent = "Save Changes";
+        document.querySelector('#modal').showModal();
+    }
+}
+
+function deleteButton(event) {
+    const deleteBtn = event.target.closest('.button--delete');
+    if (deleteBtn) {
+        const id = event.target.dataset.id;
+        alert(id);
+    }
+}
 
 // Actions Buttons
 document.querySelector('tbody').addEventListener('click', (event) => {
@@ -38,45 +68,22 @@ document.querySelector('tbody').addEventListener('click', (event) => {
         event.stopPropagation();
     }
 
-    const editBtn = event.target.closest('.button--edit');
-    if (editBtn) {
-        document.querySelector('.modal__header').innerHTML =  `
-            <form method="dialog" class="modal__close-button">
-                <button>x</button>
-            </form>
-            <h2>EDIT APPLICATION</h2>
-        `;
+    editButton(event);
+    deleteButton(event);
+});
 
-        ui.addModalContent();
-        
-        document.querySelector('.save--button').textContent = "Save Changes";
-        document.querySelector('#modal').showModal();
+
+document.addEventListener('click', (event) => {
+    const isMenuBtn = event.target.closest('.menu-btn');
+    const isDropdown = event.target.closest('.dropdown-menu');
+
+    if (!isMenuBtn && !isDropdown) {
+        document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.classList.remove('active');
+        });
     }
 });
-
-
-document.addEventListener('click', () => {
-    document.querySelectorAll('.dropdown-menu').forEach(menu => {
-        menu.classList.remove('active');
-    });
-});
 // Actions Buttons end
-
-document.querySelectorAll('.button--edit').forEach(button => {
-    button.addEventListener('click', () => {
-        document.querySelector('.modal__header').innerHTML =  `
-            <form method="dialog" class="modal__close-button">
-                <button>x</button>
-            </form>
-            <h2>EDIT APPLICATION</h2>
-        `;
-
-        ui.addModalContent();
-
-        document.querySelector('.save--button').textContent = "Save Changes";
-        document.querySelector('#modal').showModal();
-    }); 
-});
 
 document.getElementById("add-button").addEventListener("click", () => {
     document.querySelector('.modal__header').innerHTML =  `
