@@ -23,6 +23,7 @@ function asignStatusLabel(status) {
 export async function showData() {
     const tBody = document.querySelector('tbody');
     const data = await getApplications();
+    tBody.innerHTML = "";
 
     data.forEach(app => {
         const row = document.createElement('tr');
@@ -39,7 +40,13 @@ export async function showData() {
             <td class="table__column">
                 <button class="menu-btn" id="menuToggle">☰</button>
                 <div class="dropdown-menu" id="menu">
-                    <button class="dropdown__button button--edit">Edit</button>
+                    <button class="dropdown__button button--edit"
+                    data-id="${app.id}"
+                    data-jobTitle="${app.jobTitle}"
+                    data-company="${app.company}"
+                    data-date="${app.date}"
+                    data-status="${app.status}"
+                    data-notes="${app.notes}">Edit</button>
                     <button class="dropdown__button button--delete">Delete</button>
                 </div>
             </td>
