@@ -36,7 +36,26 @@ function editButton(event) {
         document.querySelector('#status-input').value = editBtn.dataset.status;
         document.querySelector('.notes--input').value = editBtn.dataset.notes;
 
-        document.querySelector('.save--button').textContent = "Save Changes";
+        const oldSaveButton = document.querySelector('.save--button');
+        oldSaveButton.textContent = "Save Changes";
+
+        const newSaveButton = oldSaveButton.cloneNode(true);
+        oldSaveButton.replaceWith(newSaveButton);
+
+        document.querySelector('.save--button').addEventListener("click", async () => {
+            const id = editBtn.dataset.id;
+            const data = applications.extractData(true);
+    
+            const response = await api.editApplication(id, data);
+
+            if (!response) {
+                return alert("Error editing the application");
+            } 
+            
+            ui.resetInputs();
+            ui.showData();
+            document.querySelector("#modal").close();
+        });
         document.querySelector('#modal').showModal();
     }
 }
@@ -104,9 +123,29 @@ document.getElementById("add-button").addEventListener("click", () => {
 
     ui.addModalContent();
 
-    document.querySelector('.save--button').textContent = "Save";
+    const oldSaveButton = document.querySelector('.save--button');
+    oldSaveButton.textContent = "Save";
+
+    // Clonar botón para eliminar listeners previos
+    const newSaveButton = oldSaveButton.cloneNode(true);
+    oldSaveButton.replaceWith(newSaveButton);
+
+    newSaveButton.addEventListener("click", async () => {
+        const data = applications.extractData();
+
+        const success = await api.addApplication(data);
+        if (!success) {
+            return alert("Error adding new application");
+        } 
+
+        ui.resetInputs();
+        ui.showData();
+        document.querySelector("#modal").close();
+    });
+
     document.querySelector('#modal').showModal();
 });
+
 
 document.querySelector('.reset--button').addEventListener("click", () => {
     ui.resetInputs();
@@ -121,4 +160,5 @@ document.querySelector('.save--button').addEventListener("click", () => {
 
     ui.resetInputs();
     ui.showData();
+    document.querySelector("#modal").close();
 });
