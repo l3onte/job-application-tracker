@@ -44,8 +44,17 @@ function editButton(event) {
 function deleteButton(event) {
     const deleteBtn = event.target.closest('.button--delete');
     if (deleteBtn) {
-        const id = event.target.dataset.id;
-        alert(id);
+        const id = deleteBtn.dataset.id;
+     
+        if (!confirm("Are you sure you want to delete this application?")) return;
+
+        api.deleteApplication(id).then(success => {
+            if (success) {
+                ui.showData();
+            } else {
+                alert("Failed to delete application");
+            }
+        })
     }
 }
 

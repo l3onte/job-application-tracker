@@ -46,3 +46,20 @@ export async function addApplication(application) {
         return false;
     }
 }
+
+export async function deleteApplication(id) {
+    try {
+        const response = await fetch(`${api}/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!response) {
+            throw new Error("Error deleting the application");
+        }
+
+        return true;
+    } catch(error) {
+        console.log(error);
+        return false;
+    }
+}
