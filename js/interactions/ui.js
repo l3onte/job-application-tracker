@@ -20,12 +20,23 @@ function asignStatusLabel(status) {
     }
 }
 
-export async function showData() {
+export async function showData(data = null, searchTerm = "") {
     const tBody = document.querySelector('tbody');
     tBody.innerHTML = "";
-    const data = await getApplications();
+    const apps = data || await getApplications();
     
-    data.forEach(app => {
+    const filtered = apps.filter(app => {
+        const term = searchTerm.toLocaleLowerCase();
+
+        return (
+            app.jobTitle.toLowerCase().includes(term) ||
+            app.company.toLowerCase().includes(term) ||
+            app.notes.toLowerCase().includes(term) ||
+            app.status.toLowerCase().includes(term)
+        );
+    });
+
+    filtered.forEach(app => {
         const row = document.createElement('tr');
 
         row.innerHTML = `
