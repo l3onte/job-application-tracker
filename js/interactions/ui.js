@@ -20,12 +20,23 @@ function asignStatusLabel(status) {
     }
 }
 
-export async function showData() {
+export async function showData(data = null, searchTerm = "") {
     const tBody = document.querySelector('tbody');
     tBody.innerHTML = "";
-    const data = await getApplications();
+    const apps = data || await getApplications();
     
-    data.forEach(app => {
+    const filtered = apps.filter(app => {
+        const term = searchTerm.toLocaleLowerCase();
+
+        return (
+            app.jobTitle.toLowerCase().includes(term) ||
+            app.company.toLowerCase().includes(term) ||
+            app.notes.toLowerCase().includes(term) ||
+            app.status.toLowerCase().includes(term)
+        );
+    });
+
+    filtered.forEach(app => {
         const row = document.createElement('tr');
 
         row.innerHTML = `
@@ -61,12 +72,15 @@ export function addModalContent() {
     document.querySelector('.modal__content').innerHTML = `
         <label for="input-job" class="modal__input-label">Job Name</label>
         <input type="text" inputmode="text" placeholder="Programmer" class="modal__input input--job" id="input-job">
-        
+        <span class="modal__error">The Job field is required</span>
+
         <label for="input-company" class="modal__input-label">Company</label>
         <input type="text" inputmode="text" placeholder="Microsoft" class="modal__input input--company" id="input-company">
+        <span class="modal__error">The Company field is required</span>
 
         <label for="date-input" class="modal__input-label">Aplied Date</label>
         <input type="date" class="modal__input date--input" id="date-input">
+        <span class="modal__error">The Aplied Date field is required</span>
 
         <label for="status-input" class="modal__input-label">Status</label>
         <select class="modal__input status--input" id="status-input">
@@ -75,6 +89,7 @@ export function addModalContent() {
             <option value="Rejected">Rejected</option>
             <option value="Accepted">Accepted</option>
         </select>
+        <span class="modal__error">The status field is required</span>
 
         <label for="note-input" class="modal__input-label">Notes</label>
         <textarea class="modal__input notes--input" placeholder="Write notes..."></textarea>

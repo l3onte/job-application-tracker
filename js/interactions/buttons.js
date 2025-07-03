@@ -5,7 +5,9 @@ import * as applications from '../data/applications.js';
 const moodButton = document.querySelector(".mood-button");
 const sortButton = document.querySelector(".sort-button");
 const sortOptions = document.querySelector(".sort-options");
-    
+const sortByStatus = document.querySelector("#sort-by-status");
+const sortByDate = document.querySelector("#sort-by-date");
+
 /* Dark mode button */
 moodButton.addEventListener("click", () => {
     moodButton.classList.toggle("mood-button--active");
@@ -16,6 +18,40 @@ sortButton.addEventListener("click", (event) => {
     sortOptions.classList.toggle('active');
     event.stopPropagation();
 });
+
+document.querySelector("#search-input").addEventListener("input", async (event) => {
+    const term = event.target.value;
+    const data = await api.getApplications();
+    ui.showData(data, term);
+});
+
+async function sortApplication(criterio) {
+    const data = await api.getApplications();
+
+    let sorted = [...data];
+    console.log(sorted);
+
+    if (criterio === "status") {
+        sorted.sort((a, b) => a.status.localeCompare(b.status));
+    }
+
+    if (criterio === "date") {
+        sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    ui.showData(sorted);
+}
+
+sortByDate.addEventListener("change", () => {
+    sortByStatus.checked = false;
+    sortApplication("date");
+});
+
+sortByStatus.addEventListener("change", () => {
+    sortByDate.checked = false;
+    sortApplication("status");
+});
+
 // Sort Options Button End
 
 function editButton(event) {
@@ -153,6 +189,10 @@ document.querySelector('.reset--button').addEventListener("click", () => {
 document.querySelector('.save--button').addEventListener("click", () => {
     const data = applications.extractData();
     
+    if (!data) {
+        return;
+    }
+
     if (!api.addApplication(data)) {
         return alert("Error");
     } 
