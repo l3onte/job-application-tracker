@@ -189,6 +189,10 @@ document.querySelector('.reset--button').addEventListener("click", () => {
 document.querySelector('.save--button').addEventListener("click", () => {
     const data = applications.extractData();
     
+    if (!data) {
+        return;
+    }
+
     if (!api.addApplication(data)) {
         return alert("Error");
     } 
